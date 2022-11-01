@@ -23,7 +23,7 @@ const AdManagement = () =>{
     const fetchData = async () => {
      setLoading(true);
       try {
-        const response = await api.memberInfo();
+        const response = await api.adInfo();
         setLists(response.data);
         setPrepared(true);
       } catch (e) {
@@ -91,7 +91,7 @@ const AdManagement = () =>{
             <tbody>
               { prepared &&
                 lists.slice(offset, offset + limit)
-                .map(({ memberNum, nickname, grade, countWrite, countComment, phone, email, regDate }) => (
+                .map(({ memberNum, nickname, grade, countWrite, countComment, phone, email, regDate, ad_num, ad_name, ad_url, ad_img }) => (
                   <tr>
                     <td>
                     <input type='checkbox' 
@@ -101,10 +101,11 @@ const AdManagement = () =>{
                       // checked={checkItems.includes(data.id) ? true : false} 
                       />
                     </td>
-                    <td>{memberNum}</td>
-                    <td>{nickname}</td>
+                    <td>{ad_num}</td>
+                    <td>{ad_name}</td>
                     <td><button>수정</button></td>
-                    <td>{grade}</td>
+                    <td>{ad_url}</td>
+                    <td>{ad_img}</td>
                   </tr>
                 ))
               }
