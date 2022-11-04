@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../api/api";
 import Loader from "../../components/Loader";
 import { isLogin } from "../../util/common";
@@ -8,6 +8,8 @@ const NotiSend = () =>{
   const [lists, setLists] = useState('');
   const [loading, setLoading] = useState(false);
   const [prepared, setPrepared] = useState(false);
+  const [Q1, setQ1] = useState('');
+  const [Q2, setQ2] = useState('');
 
   // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
@@ -62,14 +64,23 @@ const NotiSend = () =>{
   if(loading) {
     return <div className="center"><Loader/></div>
   }
-  
+  const changeRadioQ1= (e) => {
+    setQ1(e.target.value);
+    console.log(setQ1(e.target.value));
+  }
+  const changeRadioQ2= (e) => {
+    setQ2(e.target.value);
+  }
+
+
+  console.log(changeRadioQ2);
   return(
     <div className="center">
       <TopBar name="알림 발송" high1="알림 관리"/>
       <label>
         <span>알림 분류</span>
-        <label><input type="radio" name="notiType" value={1}/>공지사항</label>
-        <label><input type="radio" name="notiType" value={2}/>광고</label>
+        <label><input type="radio" name="notiType" onChange = {changeRadioQ1} value={1} checked={Q1 ==="1" ? true: false}/>공지사항</label>
+        <label><input type="radio" name="notiType" onChange = {changeRadioQ2} value={2} checked={Q2 ==="2" ? true: false}/>광고</label>
       </label>
       <br/>
       <label>

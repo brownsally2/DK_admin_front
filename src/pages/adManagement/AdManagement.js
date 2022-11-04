@@ -92,6 +92,7 @@ const AdManagement = () =>{
     }
   }
 
+
   return(
     <div className="center">
       <TopBar name="광고 관리" high1="배너 관리"/>

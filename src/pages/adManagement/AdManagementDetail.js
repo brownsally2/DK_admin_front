@@ -21,6 +21,8 @@ const AdManagementDetail = () =>{
   const [lists, setLists] = useState('');
   const [loading, setLoading] = useState(false);
   const [prepared, setPrepared] = useState(false);
+  // const [newAd_name, setNewAd_name] = useState('ad_name');
+  // const [newAd_url, setNewAd_name] = useState('ad_url');
 
   const [ad_name, setad_name] = useState('');
   const [ad_url, setad_url] = useState('');
@@ -37,12 +39,15 @@ const AdManagementDetail = () =>{
   useEffect(() => {
     const fetchData = async () => {
      setLoading(true);
-     window.localStorage.setItem(ad_name, ad_url)
-     console.log(ad_name)
-     console.log(ad_url)
       try {
         const response = await api.adminAdUpdateInfo(ad_num);
         setLists(response.data);
+        console.log(response.data)
+        if(response.data.result === "OK"){
+          window.localStorage.setItem("ad_name", ad_name)
+          window.localStorage.setItem("ad_url", ad_url)
+        }
+
         setPrepared(true);
       } catch (e) {
         console.log(e);
