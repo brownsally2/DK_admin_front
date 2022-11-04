@@ -35,23 +35,54 @@ const NotiSend = () =>{
   if(loading) {
     return <div className="center"><Loader/></div>
   }
+
+
+  const adminAdSend = () => {
+    setPrepared(false);
+    const fetchDeleteData = async () => {
+      setLoading(true);
+       try {
+         const response = await api.adminAdSend();
+         setLists(response.data);
+         setPrepared(true);
+       } catch (e) {
+         console.log(e);
+       }
+       setLoading(false);
+     };
+    fetchDeleteData();
+    setCheckItems([]);
+  }
+
+  if(!isLogin){
+    alert("잘못된 접근입니다!");
+    window.location.replace("/");
+  }
+  
+  if(loading) {
+    return <div className="center"><Loader/></div>
+  }
   
   return(
     <div className="center">
       <TopBar name="알림 발송" high1="알림 관리"/>
       <label>
         <span>알림 분류</span>
-        <label><input type="radio" name="notiType"/>공지사항</label>
-        <label><input type="radio" name="notiType"/>광고</label>
+        <label><input type="radio" name="notiType" value={1}/>공지사항</label>
+        <label><input type="radio" name="notiType" value={2}/>광고</label>
       </label>
+      <br/>
       <label>
         <span>제목</span>
         <input type="text"/>
       </label>
+      <br/>
       <label>
         <span>내용</span>
         <textarea/>
       </label>
+      <br/>
+      <button onClick={adminAdSend}>발송</button>
     </div>
   );
 };

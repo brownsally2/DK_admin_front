@@ -14,6 +14,9 @@ import WriteManagement from "./pages/contentManagement/WriteManagement";
 import CommentManagement from "./pages/contentManagement/CommentManagement";
 import AdManagement from "./pages/adManagement/AdManagement";
 import NotiSend from "./pages/notiManagement/NotiSend";
+import AdManagementDetail from "./pages/adManagement/AdManagementDetail"
+import AdManagementAdd from "./pages/adManagement/AdManagementAdd"
+
 
 function App() {
   return (
@@ -30,7 +33,10 @@ function App() {
           <Route path="/content/writeManagement" element={<WriteManagement/>}/>
           <Route path="/content/commentManagement" element={<CommentManagement/>}/>
           <Route path="/adManagement" element={<AdManagement/>}/>
+          <Route path="/adManagement/AdManagementDetail/:ad_num" element = {<AdManagementDetail/>}/>
+          <Route path="/adManagement/AdManagementAdd" element = {<AdManagementAdd/>}/>
           <Route path="/noti/send" element={<NotiSend/>}/>
+          
         </Routes>
       </Router>
     </div>
