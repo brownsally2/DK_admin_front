@@ -6,6 +6,7 @@ import TopBar from "../../components/TopBar";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import {Fragment,Button} from "react";
+import axios from "axios";
 
 
 // const adObj ={
@@ -13,11 +14,16 @@ import {Fragment,Button} from "react";
 //   ad_url : ""
 // }
 
+
 const AdManagementDetail = () =>{
 
   const{ ad_num } = useParams();
   console.log('ad_num :', ad_num)
 
+  const [adminAdUpdateInfo, setAdminAdUpdateInfo] = useState([{
+    ad_name : '',
+    ad_url : ''
+  }]);
   const [lists, setLists] = useState('');
   const [loading, setLoading] = useState(false);
   const [prepared, setPrepared] = useState(false);
@@ -41,14 +47,11 @@ const AdManagementDetail = () =>{
      setLoading(true);
       try {
         const response = await api.adminAdUpdateInfo(ad_num);
-        setLists(response.data);
-        console.log(response.data)
-        if(response.data.result === "OK"){
-          window.localStorage.setItem("ad_name", ad_name)
-          window.localStorage.setItem("ad_url", ad_url)
-        }
+        setAdminAdUpdateInfo(response.data);
+        console.log("응답"+response.data.ad_name);
+        setad_name(response.data.ad_name);
+        setad_url(response.data.ad_url);
 
-        setPrepared(true);
       } catch (e) {
         console.log(e);
       }
@@ -56,7 +59,7 @@ const AdManagementDetail = () =>{
     };
     fetchData();
   }, []);
-
+  console.log('app :: adminAdUpdateInfo:: ', adminAdUpdateInfo);
   if(!isLogin){
     alert("잘못된 접근입니다!");
     window.location.replace("/");
@@ -111,25 +114,26 @@ const AdManagementDetail = () =>{
   return(
     <div className="center">
       <TopBar name="배너 상세" high1="배너 관리" high2="광고 관리"/>
-      <div>
-        <label>
-          <span>광고 이름</span>
-          <input type="text" value={ad_name} onChange={onChangeAd_name}/>
-        </label>
-        <label>
-          <span>광고 이동 URL</span>
-          <input type="text" value={ad_url} onChange={onChangeAd_url}/>
-        </label>
+        
+            <label>
+            <span>광고 이름</span>
+            <input type="text" value={ad_name} onChange={onChangeAd_name} />
+          </label>
+          <label>
+            <span>광고 이동 URL</span>
+            <input type="text" value={ad_url}  onChange={onChangeAd_url} />
+          </label>
+       
         {/* 이미지 아직 미구현  */}
+      
         <label>
           <span>광고 이미지</span>
           <input type="file" value={ad_img}/>
         </label>
-        <br/>
+        
         <button onClick={adminAdUpdate}><Link to={"/adManagement"}>수정하기</Link></button>
       </div>
      
-    </div>
   );
 };
 

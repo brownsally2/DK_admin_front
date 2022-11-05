@@ -20,7 +20,7 @@ const api = {
     const regCmd = {
       target : localStorage.getItem("target") //삭제할 타겟들 날려줌
     }
-    return await axios.post(BASE_URL + "AdminAdDeleteServelt", regCmd, HEADER);
+    return await axios.post(BASE_URL + "AdminAdDeleteServlet", regCmd, HEADER);
   },
   // adminAdSend: async function() {
   //   const regCmd = {
@@ -31,9 +31,10 @@ const api = {
 
   adminAdUpdateInfo: async function(ad_num) {
   const regCmd = {
-    ad_num: ad_num
+    ad_num: ad_num,
+    cmd : "AdUpdateInfo"
   }
-  return await axios.get(BASE_URL + "AdminUpdateInfoServlet"
+  return await axios.post(BASE_URL + "AdminUpdateInfoServlet"
   // {params:{
   //   ad_num : ad_num
   // }

@@ -66,6 +66,23 @@ const AdManagement = () =>{
     fetchDeleteData();
     setCheckItems([]);
   }
+
+  const adminAdUpdate = () =>{
+    const fetchData = async () => {
+      setLoading(true);
+       try {
+         const response = await api.adminAdUpdateInfo();
+         setLists(response.data);
+         setPrepared(true);
+       } catch (e) {
+         console.log(e);
+       }
+       setLoading(false);
+     };
+     fetchData();
+      };
+ 
+  
   
   // 체크박스 단일 선택
   const handleSingleCheck = (checked, id) => {
@@ -127,7 +144,7 @@ const AdManagement = () =>{
                     </td>
                     <td>{ad_num}</td>
                     <td>{ad_name}</td>
-                    <td><button><Link to={`/adManagement/AdManagementDetail/${ad_num}`}>수정</Link></button></td>
+                    <td><button onClick={adminAdUpdate}><Link to={`/adManagement/AdManagementDetail/${ad_num}`}>수정</Link></button></td>
                     <td>{ad_url}</td>
                     <td>{ad_img}</td>
                   </tr>
