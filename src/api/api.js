@@ -22,23 +22,12 @@ const api = {
     }
     return await axios.post(BASE_URL + "AdminAdDeleteServlet", regCmd, HEADER);
   },
-  // adminAdSend: async function() {
-  //   const regCmd = {
-  //     target : localStorage.getItem("target") //삭제할 타겟들 날려줌
-  //   }
-  //   return await axios.post(BASE_URL + "AdminAdDeleteServelt", regCmd, HEADER);
-  // },
-
   adminAdUpdateInfo: async function(ad_num) {
   const regCmd = {
     ad_num: ad_num,
     cmd : "AdUpdateInfo"
   }
   return await axios.post(BASE_URL + "AdminUpdateInfoServlet"
-  // {params:{
-  //   ad_num : ad_num
-  // }
-// },
    ,regCmd, HEADER);
 },
   adminAdUpdate: async function(ad_num, ad_name, ad_url) {
@@ -57,7 +46,15 @@ const api = {
     };
 
     return await axios.post(BASE_URL + "AdminAdAddServlet", adObj, HEADER);
-  }
+  },
+  adminNotiSend :async function(inputStatus, inputStatus2) {
+    const adObj = {
+      inputStatus: inputStatus,
+      inputStatus2: inputStatus2
+    };
+
+    return await axios.post(BASE_URL + "AdminADNotiSendServlet", adObj, HEADER);
+  },
   };
 
 export default api;

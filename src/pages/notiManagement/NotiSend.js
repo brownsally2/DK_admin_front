@@ -8,8 +8,9 @@ const NotiSend = () =>{
   const [lists, setLists] = useState('');
   const [loading, setLoading] = useState(false);
   const [prepared, setPrepared] = useState(false);
-  const [Q1, setQ1] = useState('');
-  const [Q2, setQ2] = useState('');
+  const [inputStatus, setInputStatus] = useState(false);
+  const [inputStatus2, setInputStatus2] = useState(false);
+
 
   // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
@@ -39,12 +40,12 @@ const NotiSend = () =>{
   }
 
 
-  const adminAdSend = () => {
+  const adminNotiSend = () => {
     setPrepared(false);
     const fetchDeleteData = async () => {
       setLoading(true);
        try {
-         const response = await api.adminAdSend();
+         const response = await api.adminNotiSend();
          setLists(response.data);
          setPrepared(true);
        } catch (e) {
@@ -64,25 +65,28 @@ const NotiSend = () =>{
   if(loading) {
     return <div className="center"><Loader/></div>
   }
-  const changeRadioQ1= (e) => {
-    setQ1(e.target.value);
-    console.log(setQ1(e.target.value));
-  }
-  const changeRadioQ2= (e) => {
-    setQ2(e.target.value);
-  }
 
+const handleClickRadioButton = () => {
+  setInputStatus(!inputStatus)
+}
+const handleClickRadioButton2 = () => {
+  setInputStatus2(!inputStatus2)
+}
+console.log("라디오값1" + inputStatus);
+console.log("라디오값2" + inputStatus2);
 
-  console.log(changeRadioQ2);
-  return(
-    <div className="center">
-      <TopBar name="알림 발송" high1="알림 관리"/>
-      <label>
-        <span>알림 분류</span>
-        <label><input type="radio" name="notiType" onChange = {changeRadioQ1} value={1} checked={Q1 ==="1" ? true: false}/>공지사항</label>
-        <label><input type="radio" name="notiType" onChange = {changeRadioQ2} value={2} checked={Q2 ==="2" ? true: false}/>광고</label>
-      </label>
-      <br/>
+ 
+return(
+  <div className="center">
+    <TopBar name="알림 발송" high1="알림 관리"/>
+    <label>
+      <span>알림 분류</span>
+      <div>
+      <label><input type="radio" name="radio" id={'radio'} onChange={() => handleClickRadioButton('radio')} checked={inputStatus === 'radio'} readOnly />공지사항</label>
+      <label><input type="radio" name="radio" id={'radio2'} onChange={() => handleClickRadioButton2('radio2')} checked={inputStatus2 === 'radio2'} readOnly />광고</label>
+      </div>
+    </label>
+    <br/>
       <label>
         <span>제목</span>
         <input type="text"/>
@@ -93,7 +97,7 @@ const NotiSend = () =>{
         <textarea/>
       </label>
       <br/>
-      <button onClick={adminAdSend}>발송</button>
+      <button onClick={adminNotiSend}>발송</button>
     </div>
   );
 };

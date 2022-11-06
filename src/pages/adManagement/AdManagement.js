@@ -22,6 +22,7 @@ const AdManagement = () =>{
   const [prepared, setPrepared] = useState(false);
 
 
+
   // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
 
@@ -108,7 +109,6 @@ const AdManagement = () =>{
       setCheckItems([]);
     }
   }
-
 
   return(
     <div className="center">
