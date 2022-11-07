@@ -47,10 +47,11 @@ const api = {
 
     return await axios.post(BASE_URL + "AdminAdAddServlet", adObj, HEADER);
   },
-  adminNotiSend :async function(inputStatus, inputStatus2) {
+  adminNotiSend :async function(mail, title, content) {
     const adObj = {
-      inputStatus: inputStatus,
-      inputStatus2: inputStatus2
+      mail :mail,
+      title : title,
+      content: content
     };
 
     return await axios.post(BASE_URL + "AdminADNotiSendServlet", adObj, HEADER);

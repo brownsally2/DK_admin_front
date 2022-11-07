@@ -60,6 +60,7 @@ const AdManagementAdd = () =>{
        setLoading(false);
      };
      fetchAdUpdateData();
+     window.location.reload();
   }
   
   
